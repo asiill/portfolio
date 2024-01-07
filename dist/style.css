@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+:root {
+    /* base font family */
+    --ff-base: "Roboto", sans-serif;
+
+    /* base font size */
+    --fs-base: 14px;
+
+    /*base margin*/
+    --margin-base: 10px;
+
+    /* base padding */
+    --padding-base: 20px;
+
+    /* base gap */
+    --gap-base: 20px;
+
+    /* image dimensions */
+    --id-small: 30px;
+    --id-large: 80px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    font-family: var(--ff-base);
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-base);
+
+    padding: var(--padding-base);
+}
+
+/* --- header styles --- */
+
+header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-base);
+
+    padding: var(--padding-base);
+}
+
+.first-header-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.second-header-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    
+}
+
+.actions {
+    display: flex;
+    gap: var(--gap-base);
+}
+
+.actions>button {
+    font-size: var(--fs-base);
+    background-color: white;
+    border: transparent;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.actions>button:hover {
+    transform: scale(1.1);
+}
+
+.toggle-mode>img {
+    width: var(--id-small);
+    height: var(--id-small);
+}
+
+nav {
+    display: flex;
+    gap: var(--gap-base);
+}
+
+nav>button {
+    font-size: var(--fs-base);
+    background-color: white;
+    border: transparent;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+nav>button:hover {
+    color: blue;
+    transform: scale(1.1);
+}
+
+.links {
+    display: flex;
+    gap: var(--gap-base);
+
+    list-style: none;
+}
+
+a>img {
+    width: var(--id-small);
+    height: var(--id-small);
+    transition: transform 0.2s;
+}
+
+a>img:hover {
+    transform: scale(1.1);
+}
+
+/*--- main styles --- */
+
+main {
+    padding: var(--padding-base);
+}
+
+section {
+
+}
+
+/* --- home --- */
+
+#home {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: var(--gap-base);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    
+}
+
+.title {
+
+}
+
+/* --- about --- */
+
+#about {
+
+}
+
+/* --- projects --- */
+
+#projects {
+
+}
+
+/* --- contact --- */
+
+#contact {
+
+}
+
+/* --- footer style --- */
+
+footer {
+    padding: var(--padding-base);
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+    #header {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .first-header-row {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: var(--gap-base);
+    }
+
+    .second-header-row {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: var(--gap-base);
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    #home {
+        flex-direction: column;
+        justify-content: center;
+    }
+}

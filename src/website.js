@@ -3,17 +3,69 @@ import { loadAbout } from "./about.js";
 import { loadProjects } from "./projects.js";
 import { loadContact } from "./contact.js";
 
-const createHeader = () => {
-    const header = document.createElement("header");
+const createLinks = () => {
+    const links = document.createElement("ul");
+    links.classList.add("links");
 
-    const name = document.createElement("h1");
-    name.classList.add("name");
-    name.textContent = "asiill";
+    /* --- Github link item --- */
+    const firstItem = document.createElement("li");
 
-    header.appendChild(name);
-    
-    return header;
-};
+    const github = document.createElement("a");
+    github.classList.add("github-link");
+    github.href = "https://github.com/asiill";
+
+    const githubImg = document.createElement("img");
+    githubImg.src = "./images/github.svg";
+    githubImg.title = "github";
+
+    github.appendChild(githubImg);
+
+    /* --- Codepen link item ---*/
+    const secondItem = document.createElement("li");
+
+    const codepen = document.createElement("a");
+    codepen.classList.add("codepen-link");
+    codepen.href = "https://codepen.com";
+
+    const codepenImg = document.createElement("img");
+    codepenImg.src = "./images/codepen.svg";
+    codepenImg.title = "codepen";
+
+    codepen.appendChild(codepenImg);
+
+    firstItem.appendChild(github);
+    secondItem.appendChild(codepen);
+
+    links.appendChild(firstItem);
+    links.appendChild(secondItem);
+
+    return links;
+}
+
+const createActions = () => {
+    const actions = document.createElement("div");
+    actions.classList.add("actions");
+
+    /* --- light/dark mode toggle --- */
+    const mode = document.createElement("button");
+    mode.classList.add("toggle-mode");
+
+    const modeImg = document.createElement("img");
+    modeImg.src = "../dist/images/theme.svg";
+    modeImg.title = "toggle mode";
+
+    mode.appendChild(modeImg);
+
+    /* --- Language toggle --- */
+    const language = document.createElement("button");
+    language.classList.add("toggle-language");
+    language.textContent = "FR";
+
+    actions.appendChild(mode);
+    actions.appendChild(language);
+
+    return actions;
+}
 
 const createNav = () => {
     const nav = document.createElement("nav");
@@ -46,6 +98,31 @@ const createNav = () => {
     return nav;
 };
 
+const createHeader = () => {
+    const header = document.createElement("header");
+
+    const logo = document.createElement("h1");
+    logo.classList.add("logo");
+    logo.textContent = "A...";
+
+    const firstRow = document.createElement("div");
+    firstRow.classList.add("first-header-row");
+
+    const secondRow = document.createElement("div");
+    secondRow.classList.add("second-header-row");
+
+    firstRow.appendChild(logo);
+    firstRow.appendChild(createActions());
+
+    secondRow.appendChild(createNav());
+    secondRow.appendChild(createLinks());
+
+    header.appendChild(firstRow);
+    header.appendChild(secondRow);
+    
+    return header;
+};
+
 const createMain = () => {
     const main = document.createElement("main");
 
@@ -55,7 +132,7 @@ const createMain = () => {
 const createFooter = () => {
     const footer = document.createElement("footer");
 
-    const copyright = document.createElement("p");
+    const copyright = document.createElement("h3");
     copyright.classList.add("copyright");
     copyright.textContent = "© 2024 asiill";
     
@@ -68,9 +145,7 @@ export const loadWebsite = () => {
     const content = document.getElementById("content");
 
     content.appendChild(createHeader());
-    content.appendChild(createNav());
     content.appendChild(createMain());
-    content.appendChild(createFooter());
 
     loadHome();
 };
