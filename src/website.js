@@ -3,6 +3,35 @@ import { loadAbout } from "./about.js";
 import { loadProjects } from "./projects.js";
 import { loadContact } from "./contact.js";
 
+const getImagePath = (imageName) => {
+    // Check if the body has the "dark" class
+    const isDarkMode = document.body.classList.contains("dark");
+
+    // Define image paths for light/dark modes
+    const lightPath = `./images/${imageName}-light.svg`;
+    const darkPath = `./images/${imageName}-dark.svg`;
+
+    // Return the path based on the mode
+    return isDarkMode ? darkPath : lightPath;
+};
+
+const updateImagePaths = () => {
+    const modeImg = document.querySelector(".toggle-mode img");
+    if (modeImg) {
+        modeImg.src = getImagePath("mode");
+    }
+
+    const githubImg = document.querySelector(".github-link img");
+    if (githubImg) {
+        githubImg.src = getImagePath("github");
+    }
+
+    const codepenImg = document.querySelector(".codepen-link img");
+    if (codepenImg) {
+        codepenImg.src = getImagePath("codepen");
+    }
+};
+
 const createLinks = () => {
     const links = document.createElement("ul");
     links.classList.add("links");
@@ -15,22 +44,21 @@ const createLinks = () => {
     github.href = "https://github.com/asiill";
 
     const githubImg = document.createElement("img");
-    githubImg.src = "./images/github.svg";
+    githubImg.src = getImagePath("github");
     githubImg.title = "github";
-
-    github.appendChild(githubImg);
 
     /* --- Codepen link item ---*/
     const secondItem = document.createElement("li");
 
     const codepen = document.createElement("a");
     codepen.classList.add("codepen-link");
-    codepen.href = "https://codepen.com";
+    codepen.href = "https://codepen.io/asiill";
 
     const codepenImg = document.createElement("img");
-    codepenImg.src = "./images/codepen.svg";
+    codepenImg.src = getImagePath("codepen");
     codepenImg.title = "codepen";
 
+    github.appendChild(githubImg);
     codepen.appendChild(codepenImg);
 
     firstItem.appendChild(github);
@@ -46,20 +74,25 @@ const createActions = () => {
     const actions = document.createElement("div");
     actions.classList.add("actions");
 
-    /* --- light/dark mode toggle --- */
-    const mode = document.createElement("button");
-    mode.classList.add("toggle-mode");
-
-    const modeImg = document.createElement("img");
-    modeImg.src = "../dist/images/theme.svg";
-    modeImg.title = "toggle mode";
-
-    mode.appendChild(modeImg);
-
     /* --- Language toggle --- */
     const language = document.createElement("button");
     language.classList.add("toggle-language");
     language.textContent = "FR";
+
+    /* --- light/dark mode toggle --- */
+    const mode = document.createElement("button");
+    mode.classList.add("toggle-mode");
+    mode.addEventListener("click", () => {
+        const body = document.querySelector("body");
+        body.classList.toggle("dark");
+        updateImagePaths();
+    });
+
+    const modeImg = document.createElement("img");
+    modeImg.src = getImagePath("mode");
+    modeImg.title = "toggle mode";
+
+    mode.appendChild(modeImg);
 
     actions.appendChild(mode);
     actions.appendChild(language);
