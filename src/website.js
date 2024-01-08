@@ -2,35 +2,7 @@ import { loadHome } from "./home.js";
 import { loadAbout } from "./about.js";
 import { loadProjects } from "./projects.js";
 import { loadContact } from "./contact.js";
-
-const getImagePath = (imageName) => {
-    // Check if the body has the "dark" class
-    const isDarkMode = document.body.classList.contains("dark");
-
-    // Define image paths for light/dark modes
-    const lightPath = `./images/${imageName}-light.svg`;
-    const darkPath = `./images/${imageName}-dark.svg`;
-
-    // Return the path based on the mode
-    return isDarkMode ? darkPath : lightPath;
-};
-
-const updateImagePaths = () => {
-    const modeImg = document.querySelector(".toggle-mode img");
-    if (modeImg) {
-        modeImg.src = getImagePath("mode");
-    }
-
-    const githubImg = document.querySelector(".github-link img");
-    if (githubImg) {
-        githubImg.src = getImagePath("github");
-    }
-
-    const codepenImg = document.querySelector(".codepen-link img");
-    if (codepenImg) {
-        codepenImg.src = getImagePath("codepen");
-    }
-};
+import { getImagePath, updateImagePaths, getLanguageData, updateLanguageData } from "./utils.js";
 
 const createLinks = () => {
     const links = document.createElement("ul");
@@ -77,7 +49,12 @@ const createActions = () => {
     /* --- Language toggle --- */
     const language = document.createElement("button");
     language.classList.add("toggle-language");
-    language.textContent = "FR";
+    language.textContent = getLanguageData("actions", "switchTo");
+    language.addEventListener("click", () => {
+        const body = document.querySelector("body");
+        body.classList.toggle("french");
+        updateLanguageData();
+    })
 
     /* --- light/dark mode toggle --- */
     const mode = document.createElement("button");
@@ -90,7 +67,7 @@ const createActions = () => {
 
     const modeImg = document.createElement("img");
     modeImg.src = getImagePath("mode");
-    modeImg.title = "toggle mode";
+    modeImg.title = "mode";
 
     mode.appendChild(modeImg);
 
@@ -105,22 +82,22 @@ const createNav = () => {
 
     const home = document.createElement("button");
     home.classList.add("home-btn");
-    home.textContent = "Home";
+    home.textContent = getLanguageData("nav", "home");
     home.addEventListener("click", loadHome);
 
     const about = document.createElement("button");
     about.classList.add("about-btn");
-    about.textContent = "About";
+    about.textContent = getLanguageData("nav", "about");
     about.addEventListener("click", loadAbout);
 
     const projects = document.createElement("button");
     projects.classList.add("projects-btn");
-    projects.textContent = "Projects";
+    projects.textContent = getLanguageData("nav", "projects");
     projects.addEventListener("click", loadProjects);
 
     const contact = document.createElement("button");
     contact.classList.add("contact-btn");
-    contact.textContent = "Contact";
+    contact.textContent = getLanguageData("nav", "contact");
     contact.addEventListener("click", loadContact);
 
     nav.appendChild(home);
@@ -160,18 +137,6 @@ const createMain = () => {
     const main = document.createElement("main");
 
     return main;
-};
-
-const createFooter = () => {
-    const footer = document.createElement("footer");
-
-    const copyright = document.createElement("h3");
-    copyright.classList.add("copyright");
-    copyright.textContent = "© 2024 asiill";
-    
-    footer.appendChild(copyright);
-
-    return footer;
 };
 
 export const loadWebsite = () => {
