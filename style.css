@@ -190,16 +190,6 @@ section {
 
 }
 
-/* --- footer style --- */
-
-footer {
-    padding: var(--padding-base);
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
 @media screen and (max-width: 600px) {
     header {
         justify-content: center;
